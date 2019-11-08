@@ -203,7 +203,9 @@ let sketch = function (p) {
         p.moversLowMid = [];
         p.moversHighMid = [];
         p.strokeColor = p.color(5, 5, 5);
-        setBackgroundColor();
+       // setBackgroundColor();
+       p.backgroundColor=p.color(0,0,0);
+       p.strokeColor=p.color(255,255,255);
         p.print("setting up variables");
     }
 
