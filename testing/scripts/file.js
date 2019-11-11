@@ -389,6 +389,13 @@ function resizeCanvas() {
     myp5.initializeMovers(containerWidth, containerHeight);
 }
 
+function getCanvasSize(){
+    let sketchContainer = document.getElementById('sketch-container');
+    let positionInfo = sketchContainer.getBoundingClientRect();
+    let containerHeight = positionInfo.height;
+    let containerWidth = positionInfo.width;
+}
+
 //https://webrtchacks.com/guide-to-safari-webrtc/
 //Fix for issue on safari when leaving the tab and then returning, the audio stream would be muted and a new stream created which wasn't linked to the FFT object
 $(window).focus(function (e) {
@@ -498,13 +505,56 @@ function setBackgroundColor() {
 }
 
 //Display lines checkbox
-document.getElementById("linesCheckbox").onchange = function () {
+/*
+let linesCheckbox = document.getElementById("linesCheckbox");
+
+linesCheckbox.onchange = displayLines();
+
+function displayLines () {
+    if (linesCheckbox.checked) {
+        myp5.lines = true;
+    } else {
+        myp5.lines = false;
+    }
+
+}*/
+let linesCheckbox = document.getElementById("linesCheckbox");
+
+linesCheckbox.onchange = function () {
+    displayLines();
+}
+
+function displayLines () {
+    if ($('#linesCheckbox').is(":checked")) {
+        myp5.lines = true;
+    } else {
+        myp5.lines = false;
+    }
+
+}
+/*
+let linesCheckbox = document.getElementById("linesCheckbox");
+
+linesCheckbox.onchange = function () {
+    displayLines(this);
+    function displayLines (this) {
+        if ($(this).is(":checked")) {
+            myp5.lines = true;
+        } else {
+            myp5.lines = false;
+        }
+    }
+}
+*/
+/*
+.onchange
+ = function () {
     if (this.checked) {
         myp5.lines = true;
     } else {
         myp5.lines = false;
     }
-}
+}*/
 
 //Shape mode checkbox
 document.getElementById("shapeCheckbox").onchange = function () {
@@ -519,9 +569,14 @@ document.getElementById("shapeCheckbox").onchange = function () {
 //  myp5.sensitivity = document.getElementById('sensitivity-slider').value;
 //Sensitivity slider
 let sensitivitySlider = document.getElementById("sensitivity-slider");
+//let sensitivitySlider = document.getElementById("sensitivity-slider");
 sensitivitySlider.onchange = function () {
-    myp5.sensitivity = this.value;
-    console.log("changed");
+    changeSensitivity();
+}
+
+function changeSensitivity () {
+  //  let sensitivitySlider = document.getElementById("sensitivity-slider");
+    myp5.sensitivity = sensitivitySlider.value;
 }
 
 //RandomizedSensitivity to imitate moving the sensitivty slider which seemed to help if a mover got stuck 
